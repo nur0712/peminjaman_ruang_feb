@@ -1,0 +1,118 @@
+@import "tailwindcss";
+
+:root {
+  --background: #f6f0e8;
+  --foreground: #1d293d;
+  --card: rgba(255, 250, 244, 0.78);
+  --card-foreground: #1d293d;
+  --muted: #eadfd2;
+  --muted-foreground: #5b6678;
+  --border: rgba(29, 41, 61, 0.12);
+  --ring: rgba(31, 110, 140, 0.35);
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-border: var(--border);
+  --color-ring: var(--ring);
+  --font-sans: var(--font-manrope);
+  --font-display: var(--font-fraunces);
+}
+
+* {
+  border-color: var(--border);
+}
+
+html {
+  background:
+    radial-gradient(circle at top left, rgba(217, 93, 57, 0.12), transparent 28%),
+    radial-gradient(circle at top right, rgba(17, 87, 122, 0.14), transparent 30%),
+    linear-gradient(180deg, #fbf6ef 0%, #f6f0e8 55%, #f0e6d9 100%);
+}
+
+body {
+  color: var(--foreground);
+  font-family: var(--font-manrope), sans-serif;
+  min-height: 100vh;
+}
+
+::selection {
+  background: rgba(217, 93, 57, 0.2);
+}
+
+.font-display {
+  font-family: var(--font-fraunces), serif;
+}
+
+.page-shell {
+  position: relative;
+  isolation: isolate;
+}
+
+.mesh {
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  overflow: hidden;
+}
+
+.mesh::before,
+.mesh::after {
+  content: "";
+  position: absolute;
+  border-radius: 999px;
+  filter: blur(18px);
+}
+
+.mesh::before {
+  width: 22rem;
+  height: 22rem;
+  top: -6rem;
+  left: -5rem;
+  background: rgba(116, 179, 206, 0.18);
+}
+
+.mesh::after {
+  width: 28rem;
+  height: 28rem;
+  right: -8rem;
+  bottom: -10rem;
+  background: rgba(217, 93, 57, 0.14);
+}
+
+.glass-panel {
+  background: linear-gradient(180deg, rgba(255, 251, 246, 0.88), rgba(255, 248, 241, 0.72));
+  backdrop-filter: blur(18px);
+}
+
+.fade-up {
+  animation: fade-up 0.7s ease-out both;
+}
+
+.stagger-1 {
+  animation-delay: 0.08s;
+}
+
+.stagger-2 {
+  animation-delay: 0.16s;
+}
+
+.stagger-3 {
+  animation-delay: 0.24s;
+}
+
+@keyframes fade-up {
+  from {
+    opacity: 0;
+    transform: translateY(18px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
