@@ -1,10 +1,10 @@
 import { Filter, Sparkles } from "lucide-react";
 
-import { RoomCard } from "@/components/room-card";
+import { RoomsCatalogClient } from "@/components/rooms-catalog-client";
 import { SiteHeader } from "@/components/site-header";
 import { Badge } from "@/components/ui/badge";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
-import { bookingPolicies, rooms } from "@/lib/data";
+import { bookingPolicies } from "@/lib/data";
 
 export default function RoomsPage() {
   return (
@@ -20,8 +20,7 @@ export default function RoomsPage() {
               </Badge>
               <CardTitle className="font-display text-5xl">Cari ruang berdasarkan kapasitas dan suasana acara.</CardTitle>
               <CardDescription className="max-w-2xl text-base">
-                Semua halaman ini bersifat frontend-only. Data ruangan, kalender, dan form sudah siap untuk nanti
-                dihubungkan ke backend atau server action.
+                Data ruangan, ketersediaan, dan booking terbaru sekarang diambil dari database PostgreSQL.
               </CardDescription>
             </CardHeader>
           </Card>
@@ -35,19 +34,15 @@ export default function RoomsPage() {
               </div>
               <div className="rounded-[24px] bg-background/70 p-5">
                 <Sparkles className="mb-3 size-5 text-muted-foreground" />
-                <h3 className="mb-2 font-semibold">Visual lebih hidup</h3>
-                <p className="text-sm leading-6 text-muted-foreground">Setiap ruang punya identitas warna agar tidak terasa generik.</p>
+                <h3 className="mb-2 font-semibold">Data bukan mock lagi</h3>
+                <p className="text-sm leading-6 text-muted-foreground">Kalender dan status slot dibentuk dari booking yang aktif di backend.</p>
               </div>
             </CardContent>
           </Card>
         </section>
 
         <section className="fade-up stagger-1 grid gap-6 xl:grid-cols-[1.2fr_0.8fr]">
-          <div className="grid gap-6">
-            {rooms.map((room) => (
-              <RoomCard key={room.slug} room={room} />
-            ))}
-          </div>
+          <RoomsCatalogClient />
 
           <Card className="glass-panel h-fit">
             <CardHeader>

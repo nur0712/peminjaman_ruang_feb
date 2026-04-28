@@ -39,6 +39,7 @@ export type Room = {
 
 export type BookingRecord = {
   id: string;
+  bookingCode: string;
   roomSlug: string;
   roomName: string;
   borrower: string;
@@ -54,8 +55,6 @@ export type BookingRecord = {
 };
 
 export type BookingFormDraft = {
-  borrowerName: string;
-  email: string;
   bookingDate: string;
   attendees: string;
   startTime: string;

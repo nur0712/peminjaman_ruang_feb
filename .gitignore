@@ -16,6 +16,8 @@
 # next.js
 /.next/
 /out/
+/public/uploads/request-letters/*
+!/public/uploads/request-letters/.gitkeep
 
 # production
 /build

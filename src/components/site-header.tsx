@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 
+import { AuthStatus } from "@/components/auth-status";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 
@@ -52,9 +53,12 @@ export function SiteHeader() {
           })}
         </nav>
 
-        <Button asChild variant="outline" size="sm">
-          <Link href="/rooms">Ajukan Booking</Link>
-        </Button>
+        <div className="flex items-center gap-2">
+          <Button asChild variant="outline" size="sm" className="hidden sm:inline-flex">
+            <Link href="/rooms">Ajukan Booking</Link>
+          </Button>
+          <AuthStatus />
+        </div>
       </div>
     </header>
   );

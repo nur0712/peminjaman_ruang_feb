@@ -1,3 +1,7 @@
+"use client";
+
+import { useState } from "react";
+import { useRouter } from "next/navigation";
 import { MoreHorizontal } from "lucide-react";
 
 import { StatusBadge } from "@/components/status-badge";
@@ -11,6 +15,26 @@ type AdminBookingTableProps = {
 };
 
 export function AdminBookingTable({ bookings }: AdminBookingTableProps) {
+  const router = useRouter();
+  const [pendingId, setPendingId] = useState<string | null>(null);
+
+  async function updateStatus(id: string, status: "approved" | "rejected") {
+    setPendingId(id);
+
+    try {
+      await fetch(`/api/admin/bookings/${id}/status`, {
+        method: "PATCH",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ status }),
+      });
+      router.refresh();
+    } finally {
+      setPendingId(null);
+    }
+  }
+
   return (
     <Table>
       <TableHeader>
@@ -27,7 +51,7 @@ export function AdminBookingTable({ bookings }: AdminBookingTableProps) {
       <TableBody>
         {bookings.map((booking) => (
           <TableRow key={booking.id}>
-            <TableCell className="font-semibold">{booking.id}</TableCell>
+            <TableCell className="font-semibold">{booking.bookingCode}</TableCell>
             <TableCell>
               <p className="font-semibold">{booking.borrower}</p>
               <p className="text-xs text-muted-foreground">{booking.organization}</p>
@@ -49,13 +73,23 @@ export function AdminBookingTable({ bookings }: AdminBookingTableProps) {
             </TableCell>
             <TableCell>
               <div className="flex items-center gap-2">
-                <Button variant="secondary" size="sm">
+                <Button
+                  variant="secondary"
+                  size="sm"
+                  disabled={pendingId === booking.id || booking.status === "approved"}
+                  onClick={() => updateStatus(booking.id, "approved")}
+                >
                   Approve
                 </Button>
-                <Button variant="outline" size="sm">
+                <Button
+                  variant="outline"
+                  size="sm"
+                  disabled={pendingId === booking.id || booking.status === "rejected"}
+                  onClick={() => updateStatus(booking.id, "rejected")}
+                >
                   Reject
                 </Button>
-                <Button variant="ghost" size="icon" aria-label={`Lihat detail ${booking.id}`}>
+                <Button variant="ghost" size="icon" aria-label={`Lihat detail ${booking.bookingCode}`}>
                   <MoreHorizontal className="size-4" />
                 </Button>
               </div>

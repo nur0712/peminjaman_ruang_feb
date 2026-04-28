@@ -6,7 +6,7 @@ import { SiteHeader } from "@/components/site-header";
 import { StatusBadge } from "@/components/status-badge";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
-import { rooms } from "@/lib/data";
+import { getRoomsForDisplay } from "@/lib/queries";
 
 const steps = [
   {
@@ -15,7 +15,7 @@ const steps = [
   },
   {
     title: "Ajukan booking",
-    description: "Isi tanggal, jam, tujuan kegiatan, dan jumlah peserta dalam satu form singkat.",
+    description: "Masuk dengan akun Anda, isi jadwal, upload surat pengajuan, lalu kirim melalui API booking.",
   },
   {
     title: "Tunggu approval",
@@ -23,7 +23,11 @@ const steps = [
   },
 ];
 
-export default function Home() {
+export const dynamic = "force-dynamic";
+
+export default async function Home() {
+  const rooms = await getRoomsForDisplay();
+
   return (
     <div className="page-shell">
       <div className="mesh" />
@@ -41,8 +45,8 @@ export default function Home() {
                   Booking ruang kampus tanpa drama bentrok jadwal.
                 </h1>
                 <p className="max-w-2xl text-lg leading-8 text-muted-foreground">
-                  Frontend modern untuk melihat ketersediaan, mengajukan peminjaman, dan memantau approval admin
-                  dalam satu alur yang terasa rapi sejak layar pertama.
+                  Sekarang alurnya sudah didukung PostgreSQL, Drizzle ORM, Route Handlers, dan Better Auth untuk
+                  autentikasi pengguna serta proteksi dashboard admin.
                 </p>
               </div>
 
@@ -69,16 +73,16 @@ export default function Home() {
                 <div className="rounded-[24px] bg-background/70 p-4">
                   <div className="mb-2 flex items-center gap-2 text-sm font-semibold">
                     <CalendarDays className="size-4" />
-                    Kalender visual
+                    Kalender live
                   </div>
-                  <p className="text-sm text-muted-foreground">Status harian mudah dibaca dengan warna dan slot waktu.</p>
+                  <p className="text-sm text-muted-foreground">Status harian diambil dari booking yang tersimpan di database.</p>
                 </div>
                 <div className="rounded-[24px] bg-background/70 p-4">
                   <div className="mb-2 flex items-center gap-2 text-sm font-semibold">
                     <ShieldCheck className="size-4" />
-                    Approval terpusat
+                    Approval terproteksi
                   </div>
-                  <p className="text-sm text-muted-foreground">Admin bisa fokus ke queue persetujuan dan okupansi.</p>
+                  <p className="text-sm text-muted-foreground">Admin view bisa dibatasi berdasarkan sesi dan role pengguna.</p>
                 </div>
               </div>
             </div>
@@ -99,12 +103,12 @@ export default function Home() {
                         <div className="mb-3 flex items-center justify-between gap-3">
                           <div>
                             <p className="font-semibold">{room.shortName}</p>
-                            <p className="text-sm text-white/65">{room.calendar[0].occupancy}</p>
+                            <p className="text-sm text-white/65">{room.calendar[0]?.occupancy}</p>
                           </div>
-                          <StatusBadge status={room.calendar[0].status} />
+                          <StatusBadge status={room.calendar[0]?.status ?? "available"} />
                         </div>
                         <div className="space-y-2">
-                          {room.calendar[0].slots.slice(0, 2).map((slot) => (
+                          {room.calendar[0]?.slots.slice(0, 2).map((slot) => (
                             <div key={slot.time} className="flex items-center justify-between rounded-2xl bg-white/8 px-3 py-2 text-sm">
                               <span>{slot.time}</span>
                               <span className="text-white/70">{slot.label}</span>
@@ -163,38 +167,38 @@ export default function Home() {
 
           <Card className="glass-panel">
             <CardHeader>
-              <CardTitle className="font-display text-3xl">Kenapa tampilan ini enak dipakai?</CardTitle>
+              <CardTitle className="font-display text-3xl">Kenapa stack backend ini kuat?</CardTitle>
               <CardDescription>
-                Fokus UI ada pada keputusan cepat: ruang mana, kapan tersedia, dan apa status pengajuannya.
+                Fokusnya bukan sekadar API hidup, tapi alur booking yang aman, typed, dan mudah dikembangkan.
               </CardDescription>
             </CardHeader>
             <CardContent className="grid gap-4 sm:grid-cols-2">
               <div className="rounded-[24px] bg-background/70 p-5">
                 <Clock3 className="mb-3 size-5 text-muted-foreground" />
-                <h3 className="mb-2 font-semibold">Arah visual jelas</h3>
+                <h3 className="mb-2 font-semibold">Query typed penuh</h3>
                 <p className="text-sm leading-6 text-muted-foreground">
-                  Kontras warna membedakan info penting, detail administratif, dan aksi utama.
+                  Drizzle menjaga schema, query, dan hasil fetch tetap satu bahasa dengan TypeScript.
                 </p>
               </div>
               <div className="rounded-[24px] bg-background/70 p-5">
                 <CalendarDays className="mb-3 size-5 text-muted-foreground" />
-                <h3 className="mb-2 font-semibold">Kalender lebih terbaca</h3>
+                <h3 className="mb-2 font-semibold">Route handler eksplisit</h3>
                 <p className="text-sm leading-6 text-muted-foreground">
-                  Status available, limited, dan booked terlihat dalam sekali sapuan mata.
+                  Endpoint rooms, bookings, dan status admin bisa dipakai UI maupun integrasi eksternal.
                 </p>
               </div>
               <div className="rounded-[24px] bg-background/70 p-5">
                 <ShieldCheck className="mb-3 size-5 text-muted-foreground" />
-                <h3 className="mb-2 font-semibold">Admin cepat menindak</h3>
+                <h3 className="mb-2 font-semibold">Sesi lebih aman</h3>
                 <p className="text-sm leading-6 text-muted-foreground">
-                  Queue approval disusun agar tindak lanjut approval atau reject terasa langsung.
+                  Better Auth menangani akun, sesi, login email-password, dan role admin dalam satu fondasi.
                 </p>
               </div>
               <div className="rounded-[24px] bg-background/70 p-5">
                 <Users className="mb-3 size-5 text-muted-foreground" />
-                <h3 className="mb-2 font-semibold">Cocok untuk berbagai role</h3>
+                <h3 className="mb-2 font-semibold">Siap untuk tim kampus</h3>
                 <p className="text-sm leading-6 text-muted-foreground">
-                  Mahasiswa, dosen, dan staf tetap nyaman karena alur tidak bergantung jargon teknis.
+                  Riwayat peminjam dan approval admin sekarang bisa terhubung ke akun masing-masing pengguna.
                 </p>
               </div>
             </CardContent>
