@@ -2,8 +2,12 @@ function getEnv(name: string) {
   return process.env[name];
 }
 
+export function getPostgresPort() {
+  return getEnv("POSTGRES_PORT") ?? "5434";
+}
+
 export function getDatabaseUrl() {
-  return getEnv("DATABASE_URL") ?? "";
+  return getEnv("DATABASE_URL") ?? `postgresql://postgres:postgres@localhost:${getPostgresPort()}/feb_booking`;
 }
 
 export function getAppUrl() {

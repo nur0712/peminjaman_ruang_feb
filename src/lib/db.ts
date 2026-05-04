@@ -11,12 +11,6 @@ declare global {
 function createPool() {
   const connectionString = getDatabaseUrl();
 
-  if (!connectionString) {
-    return new Pool({
-      connectionString: "postgresql://postgres:postgres@localhost:5432/feb_booking",
-    });
-  }
-
   return new Pool({
     connectionString,
     ssl: connectionString.includes("localhost") ? undefined : { rejectUnauthorized: false },
