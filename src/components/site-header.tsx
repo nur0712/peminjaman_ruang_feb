@@ -19,10 +19,7 @@ const links = [
 export function SiteHeader() {
   const pathname = usePathname();
   const [isMobileNavOpen, setIsMobileNavOpen] = useState(false);
-
-  useEffect(() => {
-    setIsMobileNavOpen(false);
-  }, [pathname]);
+  const closeMobileNav = () => setIsMobileNavOpen(false);
 
   useEffect(() => {
     document.body.style.overflow = isMobileNavOpen ? "hidden" : "";
@@ -35,15 +32,15 @@ export function SiteHeader() {
   return (
     <header className="sticky top-0 z-40 border-b border-border/60 bg-background/75 backdrop-blur-xl">
       <div className="mx-auto flex w-full max-w-7xl items-center justify-between gap-4 px-4 py-4 sm:px-6 lg:px-8">
-        <Link href="/" className="flex items-center gap-3">
+        <Link href="/" className="flex items-center gap-3" onClick={closeMobileNav}>
           <div className="flex size-11 items-center justify-center rounded-2xl bg-foreground text-sm font-bold text-background">
-            FEB
+            BD
           </div>
           <div>
             <p className="text-xs uppercase tracking-[0.24em] text-muted-foreground">
               Peminjaman Ruang
             </p>
-            <p className="font-display text-lg text-foreground">Gedung FEB</p>
+            <p className="font-display text-lg text-foreground">Program Studi Bisnis Digital</p>
           </div>
         </Link>
 
@@ -99,7 +96,7 @@ export function SiteHeader() {
 
       <aside
         className={cn(
-          "fixed inset-y-0 right-0 z-50 flex w-[min(88vw,24rem)] flex-col border-l border-border/60 bg-[linear-gradient(180deg,rgba(255,251,246,0.98),rgba(246,240,232,0.96))] p-5 shadow-2xl shadow-black/10 transition-transform duration-300 md:hidden",
+          "fixed inset-y-0 right-0 z-50 flex w-[min(88vw,24rem)] flex-col border-l border-border/60 bg-[linear-gradient(180deg,rgba(249,252,255,0.98),rgba(220,234,251,0.96))] p-5 shadow-2xl shadow-black/10 transition-transform duration-300 md:hidden",
           isMobileNavOpen ? "translate-x-0" : "translate-x-full",
         )}
         aria-hidden={!isMobileNavOpen}
@@ -109,7 +106,7 @@ export function SiteHeader() {
             <p className="text-xs uppercase tracking-[0.24em] text-muted-foreground">
               Navigasi
             </p>
-            <p className="font-display text-2xl text-foreground">Gedung FEB</p>
+            <p className="font-display text-2xl text-foreground">Program Studi Bisnis Digital</p>
           </div>
           <Button
             type="button"
@@ -132,6 +129,7 @@ export function SiteHeader() {
               <Link
                 key={link.href}
                 href={link.href}
+                onClick={closeMobileNav}
                 className={cn(
                   "rounded-2xl px-4 py-3 text-sm font-semibold transition",
                   active
@@ -151,7 +149,9 @@ export function SiteHeader() {
             Ajukan peminjaman atau masuk ke akun Anda langsung dari menu ini.
           </p>
           <Button asChild className="mt-4 w-full">
-            <Link href="/rooms">Ajukan Booking</Link>
+            <Link href="/rooms" onClick={closeMobileNav}>
+              Ajukan Booking
+            </Link>
           </Button>
         </div>
 

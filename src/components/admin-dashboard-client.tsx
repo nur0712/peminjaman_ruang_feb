@@ -53,7 +53,7 @@ export function AdminDashboardClient() {
   }
 
   if (!isAdmin(session.user.role)) {
-    return <ErrorState title="Bukan akun admin." description="Halaman ini hanya tersedia untuk admin FEB." />;
+    return <ErrorState title="Bukan akun admin." description="Halaman ini hanya tersedia untuk admin Program Studi Bisnis Digital." />;
   }
 
   if (isLoading) {

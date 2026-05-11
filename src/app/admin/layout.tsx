@@ -21,7 +21,7 @@ export default function AdminLayout({
               </div>
               <div>
                 <p className="text-xs uppercase tracking-[0.24em] text-muted-foreground">Admin Workspace</p>
-                <h1 className="font-display text-3xl">Kontrol Peminjaman FEB</h1>
+                <h1 className="font-display text-3xl">Kontrol Peminjaman Program Studi Bisnis Digital</h1>
               </div>
             </div>
             <div className="flex flex-wrap items-center gap-3">

@@ -7,7 +7,7 @@ import { getBetterAuthSecret, getBetterAuthUrl } from "@/lib/env";
 import { schema } from "@/lib/schema";
 
 export const auth = betterAuth({
-  appName: "Peminjaman Ruang FEB",
+  appName: "Peminjaman Ruang Program Studi Bisnis Digital",
   secret: getBetterAuthSecret(),
   baseURL: getBetterAuthUrl(),
   database: drizzleAdapter(db, {

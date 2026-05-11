@@ -1,14 +1,14 @@
 @import "tailwindcss";
 
 :root {
-  --background: #f6f0e8;
-  --foreground: #1d293d;
-  --card: rgba(255, 250, 244, 0.78);
-  --card-foreground: #1d293d;
-  --muted: #eadfd2;
-  --muted-foreground: #5b6678;
-  --border: rgba(29, 41, 61, 0.12);
-  --ring: rgba(31, 110, 140, 0.35);
+  --background: #edf5ff;
+  --foreground: #10233f;
+  --card: rgba(248, 252, 255, 0.8);
+  --card-foreground: #10233f;
+  --muted: #dceafb;
+  --muted-foreground: #4a6285;
+  --border: rgba(16, 35, 63, 0.12);
+  --ring: rgba(37, 99, 235, 0.3);
 }
 
 @theme inline {
@@ -30,9 +30,9 @@
 
 html {
   background:
-    radial-gradient(circle at top left, rgba(217, 93, 57, 0.12), transparent 28%),
-    radial-gradient(circle at top right, rgba(17, 87, 122, 0.14), transparent 30%),
-    linear-gradient(180deg, #fbf6ef 0%, #f6f0e8 55%, #f0e6d9 100%);
+    radial-gradient(circle at top left, rgba(59, 130, 246, 0.18), transparent 28%),
+    radial-gradient(circle at top right, rgba(14, 165, 233, 0.16), transparent 30%),
+    linear-gradient(180deg, #f5faff 0%, #edf5ff 55%, #dceafb 100%);
 }
 
 body {
@@ -42,7 +42,7 @@ body {
 }
 
 ::selection {
-  background: rgba(217, 93, 57, 0.2);
+  background: rgba(59, 130, 246, 0.22);
 }
 
 .font-display {
@@ -74,7 +74,7 @@ body {
   height: 22rem;
   top: -6rem;
   left: -5rem;
-  background: rgba(116, 179, 206, 0.18);
+  background: rgba(59, 130, 246, 0.18);
 }
 
 .mesh::after {
@@ -82,11 +82,11 @@ body {
   height: 28rem;
   right: -8rem;
   bottom: -10rem;
-  background: rgba(217, 93, 57, 0.14);
+  background: rgba(14, 165, 233, 0.15);
 }
 
 .glass-panel {
-  background: linear-gradient(180deg, rgba(255, 251, 246, 0.88), rgba(255, 248, 241, 0.72));
+  background: linear-gradient(180deg, rgba(249, 252, 255, 0.92), rgba(237, 245, 255, 0.76));
   backdrop-filter: blur(18px);
 }
 

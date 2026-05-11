@@ -39,7 +39,7 @@ export default async function Home() {
               <StatusBadge status="available" />
               <div className="space-y-4">
                 <p className="text-xs uppercase tracking-[0.3em] text-muted-foreground">
-                  Sistem Peminjaman Ruang Gedung FEB
+                  Sistem Peminjaman Ruang Program Studi Bisnis Digital
                 </p>
                 <h1 className="font-display max-w-3xl text-5xl leading-tight text-foreground sm:text-6xl">
                   Booking ruang kampus tanpa drama bentrok jadwal.
@@ -89,13 +89,13 @@ export default async function Home() {
 
             <Card className="overflow-hidden border-none bg-transparent shadow-none">
               <CardContent className="p-0">
-                <div className="rounded-[32px] bg-[#1d293d] p-6 text-white">
+                <div className="rounded-[32px] bg-[linear-gradient(145deg,#0f2f5f,#1d4f91,#2f7dd1)] p-6 text-white">
                   <div className="mb-6 flex items-center justify-between">
                     <div>
                       <p className="text-xs uppercase tracking-[0.24em] text-white/60">Ringkasan Hari Ini</p>
                       <h2 className="font-display text-3xl">Operasional Ruang</h2>
                     </div>
-                    <Sparkles className="size-6 text-[#ffcf99]" />
+                    <Sparkles className="size-6 text-[#bfe3ff]" />
                   </div>
                   <div className="space-y-4">
                     {rooms.map((room) => (

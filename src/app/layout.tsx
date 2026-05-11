@@ -13,8 +13,8 @@ const display = Fraunces({
 });
 
 export const metadata: Metadata = {
-  title: "FEB Room Booking",
-  description: "Frontend sistem peminjaman ruang Gedung FEB untuk peminjam dan admin.",
+  title: "Peminjaman Ruang Program Studi Bisnis Digital",
+  description: "Sistem peminjaman ruang Program Studi Bisnis Digital untuk peminjam dan admin.",
 };
 
 export default function RootLayout({
@@ -23,10 +23,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html
-      lang="en"
-      className={`${sans.variable} ${display.variable} h-full scroll-smooth antialiased`}
-    >
+    <html lang="id" className={`${sans.variable} ${display.variable} h-full scroll-smooth antialiased`}>
       <body className="min-h-full bg-background text-foreground">{children}</body>
     </html>
   );
